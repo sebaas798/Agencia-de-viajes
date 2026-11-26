@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bienaventurados — Viajes que se sienten en familia</title>
+<meta name="description" content="Agencia de viajes premium para familias y grupos de amigos. Viajes a medida, sostenibles y sin complicaciones.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,500&family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#040f14;
+  --deep:#071e24;
+  --pine:#0b2f33;
+  --teal:#0f4b4a;
+  --emerald:#1fd396;
+  --mint:#7ff0c8;
+  --aqua:#4cc9e8;
+  --cream:#eef7f2;
+  --muted:#93b3ab;
+  --line:rgba(148,196,182,.14);
+  --grad:linear-gradient(100deg,var(--emerald),var(--aqua));
+  --serif:'Fraunces',Georgia,serif;
+  --sans:'Sora',system-ui,sans-serif;
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+::selection{background:rgba(31,211,150,.35);color:#fff}
+body{
+  font-family:var(--sans);
+  background:var(--ink);
+  color:var(--cream);
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+  line-height:1.6;
+}
+/* ---------- Grain overlay ---------- */
+body::after{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:9998;opacity:.05;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+}
+/* ---------- Preloader ---------- */
+#loader{
+  position:fixed;inset:0;z-index:10000;background:var(--ink);
+  display:flex;align-items:center;justify-content:center;flex-direction:column;gap:26px;
+  transition:opacity .7s var(--ease),visibility .7s;
+}
+#loader.done{opacity:0;visibility:hidden}
+#loader .mark{width:64px;height:64px;animation:pulse 1.6s ease-in-out infinite}
+#loader .word{
+  font-family:var(--serif);font-size:clamp(1.4rem,3vw,2rem);letter-spacing:.35em;text-transform:uppercase;
+  background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;
+}
+#loader .bar{width:180px;height:1px;background:var(--line);overflow:hidden}
+#loader .bar i{display:block;height:100%;width:40%;background:var(--grad);animation:load 1.2s var(--ease) infinite}
+@keyframes load{0%{transform:translateX(-100%)}100%{transform:translateX(450%)}}
+@keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.08);opacity:.75}}
+/* ---------- Cursor ---------- */
+#cursor{
+  position:fixed;top:0;left:0;width:10px;height:10px;border-radius:50%;
+  background:var(--emerald);pointer-events:none;z-index:9999;
+  transform:translate(-50%,-50%);transition:width .25s,height .25s,opacity .3s,background .25s;
+  mix-blend-mode:screen;
+}
+#cursor.big{width:52px;height:52px;background:rgba(76,201,232,.35)}
+@media (hover:none){#cursor{display:none}}
+/* ---------- Nav ---------- */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:22px clamp(20px,5vw,64px);
+  transition:background .4s,backdrop-filter .4s,padding .4s,border-color .4s;
+  border-bottom:1px solid transparent;
+}
+nav.scrolled{
+  background:rgba(4,15,20,.72);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+  padding:14px clamp(20px,5vw,64px);border-bottom-color:var(--line);
+}
+.logo{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--cream)}
+.logo svg{width:34px;height:34px}
+.logo b{font-family:var(--serif);font-weight:500;font-size:1.25rem;letter-spacing:.02em}
+.logo small{display:block;font-size:.58rem;letter-spacing:.42em;text-transform:uppercase;color:var(--muted);margin-top:-2px}
+.nav-links{display:flex;gap:34px;list-style:none}
+.nav-links a{
+  color:var(--muted);text-decoration:none;font-size:.85rem;letter-spacing:.06em;
+  position:relative;transition:color .3s;
+}
+.nav-links a::after{
+  content:"";position:absolute;left:0;bottom:-6px;height:1px;width:0;background:var(--grad);transition:width .35s var(--ease);
+}
+.nav-links a:hover{color:var(--cream)}
+.nav-links a:hover::after{width:100%}
+.btn{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:14px 30px;border-radius:100px;border:0;cursor:pointer;
+  font-family:var(--sans);font-size:.9rem;font-weight:600;letter-spacing:.03em;
+  text-decoration:none;position:relative;overflow:hidden;
+  transition:transform .35s var(--ease),box-shadow .35s;
+  will-change:transform;
+}
+.btn-solid{background:var(--grad);color:#03251b}
+.btn-solid:hover{box-shadow:0 12px 40px -8px rgba(31,211,150,.5)}
+.btn-ghost{background:transparent;color:var(--cream);border:1px solid rgba(238,247,242,.25)}
+.btn-ghost:hover{border-color:var(--emerald);color:var(--mint)}
+.btn .arr{transition:transform .35s var(--ease)}
+.btn:hover .arr{transform:translateX(5px)}
+.btn-nav{padding:11px 24px;font-size:.82rem}
+#burger{display:none;background:none;border:0;cursor:pointer;z-index:1002;width:36px;height:30px;position:relative}
+#burger span{position:absolute;left:4px;right:4px;height:2px;background:var(--cream);transition:.35s var(--ease)}
+#burger span:nth-child(1){top:8px}#burger span:nth-child(2){top:15px}#burger span:nth-child(3){top:22px}
+#burger.open span:nth-child(1){top:15px;transform:rotate(45deg)}
+#burger.open span:nth-child(2){opacity:0}
+#burger.open span:nth-child(3){top:15px;transform:rotate(-45deg)}
+@media(max-width:900px){
+  .nav-links{
+    position:fixed;inset:0;background:rgba(4,15,20,.97);backdrop-filter:blur(20px);
+    flex-direction:column;align-items:center;justify-content:center;gap:38px;
+    opacity:0;visibility:hidden;transition:.45s var(--ease);z-index:1001;
+  }
+  .nav-links.open{opacity:1;visibility:visible}
+  .nav-links a{font-size:1.5rem;font-family:var(--serif)}
+  .btn-nav{display:none}
+  #burger{display:block}
+}
+/* ---------- Hero ---------- */
+#hero{
+  min-height:100svh;position:relative;display:grid;
+  grid-template-columns:1.15fr .85fr;align-items:center;gap:40px;
+  padding:140px clamp(20px,5vw,64px) 80px;overflow:hidden;
+}
+.aurora{position:absolute;border-radius:50%;filter:blur(90px);opacity:.5;pointer-events:none}
+.aurora.a1{width:56vw;height:56vw;background:radial-gradient(circle,rgba(15,75,74,.9),transparent 65%);top:-18vw;left:-14vw;animation:drift1 16s ease-in-out infinite alternate}
+.aurora.a2{width:44vw;height:44vw;background:radial-gradient(circle,rgba(31,211,150,.24),transparent 65%);bottom:-12vw;right:-8vw;animation:drift2 20s ease-in-out infinite alternate}
+.aurora.a3{width:30vw;height:30vw;background:radial-gradient(circle,rgba(76,201,232,.2),transparent 65%);top:30%;right:30%;animation:drift1 24s ease-in-out infinite alternate-reverse}
+@keyframes drift1{to{transform:translate(6vw,4vw) scale(1.15)}}
+@keyframes drift2{to{transform:translate(-5vw,-6vw) scale(.9)}}
+.hero-copy{position:relative;z-index:2;max-width:640px}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:10px;
+  border:1px solid var(--line);border-radius:100px;padding:8px 18px;
+  font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;color:var(--mint);
+  background:rgba(11,47,51,.4);backdrop-filter:blur(6px);margin-bottom:30px;
+}
+.eyebrow i{width:6px;height:6px;border-radius:50%;background:var(--emerald);animation:pulse 2s infinite}
+h1{
+  font-family:var(--serif);font-weight:400;
+  font-size:clamp(2.7rem,6.2vw,5.2rem);line-height:1.04;letter-spacing:-.015em;
+}
+h1 .line{display:block;overflow:hidden}
+h1 .line span{display:block;transform:translateY(110%);animation:rise 1.1s var(--ease) forwards}
+h1 .line:nth-child(2) span{animation-delay:.12s}
+h1 .line:nth-child(3) span{animation-delay:.24s}
+@keyframes rise{to{transform:translateY(0)}}
+h1 em{
+  font-style:italic;font-weight:300;
+  background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.hero-sub{margin:28px 0 38px;color:var(--muted);font-size:clamp(1rem,1.4vw,1.15rem);max-width:480px;font-weight:300}
+.hero-ctas{display:flex;gap:16px;flex-wrap:wrap}
+.hero-stats{display:flex;gap:clamp(24px,4vw,56px);margin-top:60px;flex-wrap:wrap}
+.stat b{font-family:var(--serif);font-size:clamp(1.7rem,2.6vw,2.4rem);font-weight:500;display:block;line-height:1}
+.stat b i{font-style:normal;color:var(--emerald)}
+.stat span{font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+/* hero collage */
+.hero-visual{position:relative;z-index:2;height:min(72vh,620px);min-height:420px}
+.card-ph{
+  position:absolute;border-radius:22px;overflow:hidden;
+  border:1px solid var(--line);
+  box-shadow:0 30px 80px -20px rgba(0,0,0,.6);
+  transition:transform .6s var(--ease);
+  will-change:transform;
+}
+.ph{
+  width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;
+  background:linear-gradient(135deg,#0b2f33 0%,#0f4b4a 55%,#123c46 100%);
+  position:relative;color:var(--muted);text-align:center;padding:18px;
+}
+.ph::before{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(110deg,transparent 30%,rgba(127,240,200,.09) 48%,transparent 62%);
+  background-size:220% 100%;animation:shimmer 3.4s linear infinite;
+}
+@keyframes shimmer{0%{background-position:120% 0}100%{background-position:-120% 0}}
+.ph svg{width:34px;height:34px;opacity:.7}
+.ph p{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;line-height:1.7;max-width:200px}
+.cph1{width:62%;height:64%;top:0;right:6%;z-index:3;animation:float1 7s ease-in-out infinite}
+.cph2{width:46%;height:44%;bottom:4%;left:0;z-index:4;animation:float2 8.5s ease-in-out infinite}
+.cph3{width:34%;height:34%;bottom:16%;right:0;z-index:2;animation:float1 9.5s ease-in-out infinite reverse}
+@keyframes float1{0%,100%{transform:translateY(0) rotate(-1.2deg)}50%{transform:translateY(-14px) rotate(-.4deg)}}
+@keyframes float2{0%,100%{transform:translateY(0) rotate(1.6deg)}50%{transform:translateY(-10px) rotate(.6deg)}}
+.tag-chip{
+  position:absolute;z-index:5;display:flex;align-items:center;gap:10px;
+  background:rgba(4,15,20,.8);backdrop-filter:blur(14px);
+  border:1px solid var(--line);border-radius:14px;padding:12px 18px;
+  font-size:.78rem;box-shadow:0 18px 50px -12px rgba(0,0,0,.55);
+  animation:float2 6.5s ease-in-out infinite;
+}
+.tag-chip .dotico{width:34px;height:34px;border-radius:10px;background:rgba(31,211,150,.15);display:grid;place-items:center}
+.tag-chip b{display:block;font-size:.82rem}
+.tag-chip small{color:var(--muted);font-size:.68rem}
+.chip1{top:8%;left:-4%}
+.chip2{bottom:-2%;right:18%;animation-delay:1.4s}
+.scroll-hint{
+  position:absolute;bottom:26px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:10px;color:var(--muted);
+  font-size:.62rem;letter-spacing:.32em;text-transform:uppercase;z-index:3;
+}
+.scroll-hint i{width:1px;height:44px;background:linear-gradient(var(--emerald),transparent);display:block;animation:dropline 1.8s var(--ease) infinite}
+@keyframes dropline{0%{transform:scaleY(0);transform-origin:top}45%{transform:scaleY(1);transform-origin:top}55%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+@media(max-width:1020px){
+  #hero{grid-template-columns:1fr;padding-top:120px;text-align:left}
+  .hero-visual{height:52vw;min-height:340px;max-width:640px}
+}
+/* ---------- Marquee ---------- */
+.marquee{
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:22px 0;overflow:hidden;background:rgba(7,30,36,.5);position:relative;
+}
+.marquee .track{display:flex;gap:64px;width:max-content;animation:scrollx 30s linear infinite}
+.marquee:hover .track{animation-play-state:paused}
+.marquee span{
+  font-family:var(--serif);font-size:1.05rem;font-weight:300;letter-spacing:.06em;
+  color:var(--muted);display:flex;align-items:center;gap:64px;white-space:nowrap;
+}
+.marquee span::after{content:"✦";color:var(--emerald);font-size:.8rem}
+@keyframes scrollx{to{transform:translateX(-50%)}}
+/* ---------- Sections ---------- */
+section{padding:clamp(80px,10vw,140px) clamp(20px,5vw,64px);position:relative}
+.wrap{max-width:1240px;margin:0 auto}
+.sec-head{max-width:720px;margin-bottom:clamp(44px,6vw,72px)}
+.kicker{
+  font-size:.72rem;letter-spacing:.32em;text-transform:uppercase;color:var(--emerald);
+  display:flex;align-items:center;gap:14px;margin-bottom:20px;
+}
+.kicker::before{content:"";width:36px;height:1px;background:var(--grad)}
+h2{
+  font-family:var(--serif);font-weight:400;
+  font-size:clamp(2rem,4.4vw,3.4rem);line-height:1.1;letter-spacing:-.01em;
+}
+h2 em{font-style:italic;font-weight:300;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sec-sub{color:var(--muted);margin-top:18px;font-weight:300;max-width:560px}
+/* reveal */
+.rv{opacity:0;transform:translateY(46px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.rv.on{opacity:1;transform:none}
+/* ---------- Ventajas (bento) ---------- */
+#ventajas{background:linear-gradient(180deg,var(--ink),var(--deep) 60%,var(--ink))}
+.bento{display:grid;grid-template-columns:repeat(12,1fr);gap:18px}
+.bcard{
+  border:1px solid var(--line);border-radius:24px;padding:36px;position:relative;overflow:hidden;
+  background:linear-gradient(160deg,rgba(11,47,51,.55),rgba(7,30,36,.35));
+  transition:transform .5s var(--ease),border-color .5s;
+}
+.bcard::before{
+  content:"";position:absolute;inset:0;opacity:0;transition:opacity .5s;pointer-events:none;
+  background:radial-gradient(600px circle at var(--mx,50%) var(--my,50%),rgba(31,211,150,.12),transparent 45%);
+}
+.bcard:hover::before{opacity:1}
+.bcard:hover{transform:translateY(-6px);border-color:rgba(31,211,150,.35)}
+.b-lg{grid-column:span 7;min-height:340px;display:flex;flex-direction:column;justify-content:flex-end}
+.b-md{grid-column:span 5}
+.b-sm{grid-column:span 4}
+.bcard .bimg{position:absolute;inset:0;z-index:0}
+.bcard .bimg .ph{border-radius:0}
+.bcard .bimg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 20%,rgba(4,15,20,.92) 85%)}
+.bcard .inner{position:relative;z-index:1}
+.icobox{
+  width:52px;height:52px;border-radius:16px;display:grid;place-items:center;margin-bottom:22px;
+  background:rgba(31,211,150,.12);border:1px solid rgba(31,211,150,.25);
+}
+.icobox svg{width:24px;height:24px;stroke:var(--mint)}
+.bcard h3{font-family:var(--serif);font-weight:500;font-size:1.35rem;margin-bottom:10px}
+.bcard p{color:var(--muted);font-size:.92rem;font-weight:300}
+.bcard .num{
+  position:absolute;top:26px;right:30px;font-family:var(--serif);font-style:italic;
+  color:rgba(147,179,171,.28);font-size:1.1rem;z-index:1;
+}
+@media(max-width:900px){.b-lg,.b-md,.b-sm{grid-column:span 12}.b-sm{grid-column:span 12}}
+@media(min-width:640px) and (max-width:900px){.b-sm{grid-column:span 6}}
+/* ---------- Banda números ---------- */
+#numeros{padding-top:0}
+.numband{
+  border:1px solid var(--line);border-radius:28px;
+  background:linear-gradient(120deg,rgba(15,75,74,.5),rgba(7,30,36,.6));
+  display:grid;grid-template-columns:repeat(4,1fr);
+  padding:clamp(30px,4vw,56px) clamp(20px,3vw,40px);gap:24px;position:relative;overflow:hidden;
+}
+.numband::before{content:"";position:absolute;top:-60%;left:20%;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(31,211,150,.18),transparent 70%);filter:blur(30px)}
+.numband .cell{text-align:center;position:relative}
+.numband .cell+.cell::before{content:"";position:absolute;left:-12px;top:15%;bottom:15%;width:1px;background:var(--line)}
+.numband b{font-family:var(--serif);font-size:clamp(2rem,3.6vw,3.2rem);font-weight:500;display:block;line-height:1.1}
+.numband b i{font-style:normal;color:var(--emerald)}
+.numband span{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+@media(max-width:760px){.numband{grid-template-columns:repeat(2,1fr)}.numband .cell:nth-child(3)::before{display:none}}
+/* ---------- Testimonios ---------- */
+#testimonios{overflow:hidden}
+.t-viewport{overflow:hidden;margin:0 -8px}
+.t-track{display:flex;transition:transform .7s var(--ease)}
+.t-slide{flex:0 0 33.333%;padding:8px;min-width:0}
+@media(max-width:1020px){.t-slide{flex-basis:50%}}
+@media(max-width:680px){.t-slide{flex-basis:100%}}
+.t-card{
+  height:100%;border:1px solid var(--line);border-radius:24px;padding:34px;
+  background:linear-gradient(160deg,rgba(11,47,51,.5),rgba(7,30,36,.3));
+  display:flex;flex-direction:column;gap:20px;position:relative;overflow:hidden;
+  transition:border-color .4s,transform .4s var(--ease);
+}
+.t-card:hover{border-color:rgba(76,201,232,.4);transform:translateY(-4px)}
+.t-card .quo{font-family:var(--serif);font-size:4rem;line-height:0;color:rgba(31,211,150,.35);height:24px;font-style:italic}
+.stars{color:var(--emerald);letter-spacing:3px;font-size:.85rem}
+.t-card blockquote{font-weight:300;color:var(--cream);font-size:.98rem;flex:1}
+.t-who{display:flex;align-items:center;gap:14px}
+.avatar{
+  width:48px;height:48px;border-radius:50%;flex:none;
+  background:linear-gradient(135deg,var(--teal),var(--pine));
+  border:1px solid var(--line);display:grid;place-items:center;
+  font-family:var(--serif);font-style:italic;color:var(--mint);
+}
+.t-who b{display:block;font-size:.92rem}
+.t-who small{color:var(--muted);font-size:.76rem}
+.t-nav{display:flex;align-items:center;justify-content:space-between;margin-top:36px}
+.t-dots{display:flex;gap:8px}
+.t-dots i{width:8px;height:8px;border-radius:100px;background:rgba(147,179,171,.3);cursor:pointer;transition:.35s var(--ease)}
+.t-dots i.on{width:28px;background:var(--grad)}
+.t-arrows{display:flex;gap:12px}
+.t-arrows button{
+  width:52px;height:52px;border-radius:50%;border:1px solid var(--line);background:transparent;
+  color:var(--cream);cursor:pointer;font-size:1.1rem;transition:.35s;
+}
+.t-arrows button:hover{background:var(--grad);color:#03251b;border-color:transparent}
+/* ---------- Contacto ---------- */
+#contacto{background:linear-gradient(180deg,var(--ink),var(--deep))}
+.c-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:clamp(40px,6vw,90px);align-items:start}
+@media(max-width:900px){.c-grid{grid-template-columns:1fr}}
+.c-item{display:flex;gap:18px;align-items:flex-start;padding:22px 0;border-bottom:1px solid var(--line)}
+.c-item .icobox{margin:0;width:46px;height:46px;flex:none}
+.c-item b{display:block;font-size:.95rem;margin-bottom:2px}
+.c-item a,.c-item span{color:var(--muted);text-decoration:none;font-size:.9rem;font-weight:300}
+.c-item a:hover{color:var(--mint)}
+form{
+  border:1px solid var(--line);border-radius:28px;padding:clamp(28px,4vw,48px);
+  background:linear-gradient(160deg,rgba(11,47,51,.55),rgba(7,30,36,.35));
+  display:grid;grid-template-columns:1fr 1fr;gap:22px;position:relative;overflow:hidden;
+}
+.f-full{grid-column:1/-1}
+.field label{display:block;font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.field input,.field select,.field textarea{
+  width:100%;background:rgba(4,15,20,.55);border:1px solid var(--line);border-radius:14px;
+  padding:16px 18px;color:var(--cream);font-family:var(--sans);font-size:.95rem;
+  outline:none;transition:border-color .3s,box-shadow .3s;appearance:none;
+}
+.field textarea{resize:vertical;min-height:120px}
+.field input:focus,.field select:focus,.field textarea:focus{
+  border-color:var(--emerald);box-shadow:0 0 0 4px rgba(31,211,150,.12);
+}
+.field select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2393b3ab' fill='none' stroke-width='1.5'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 18px center}
+.field select option{background:var(--deep)}
+#f-ok{
+  position:absolute;inset:0;background:rgba(4,15,20,.96);z-index:5;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;text-align:center;padding:30px;
+  opacity:0;visibility:hidden;transition:.5s;
+}
+#f-ok.show{opacity:1;visibility:visible}
+#f-ok .big{font-family:var(--serif);font-size:1.8rem}
+#f-ok p{color:var(--muted);max-width:340px;font-weight:300}
+#f-ok .icobox{width:70px;height:70px;border-radius:50%}
+/* ---------- Viajes ---------- */
+.trips{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+@media(max-width:1020px){.trips{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:640px){.trips{grid-template-columns:1fr}}
+.tripcard{
+  border:1px solid var(--line);border-radius:24px;overflow:hidden;text-decoration:none;color:var(--cream);
+  background:linear-gradient(160deg,rgba(11,47,51,.5),rgba(7,30,36,.3));
+  display:flex;flex-direction:column;position:relative;
+  transition:transform .5s var(--ease),border-color .5s,box-shadow .5s;
+}
+.tripcard:hover{transform:translateY(-8px);border-color:rgba(31,211,150,.4);box-shadow:0 30px 70px -24px rgba(0,0,0,.7)}
+.tripcard .timg{height:210px;position:relative;flex:none}
+.tripcard .badgep{
+  position:absolute;top:14px;left:14px;z-index:2;
+  background:rgba(4,15,20,.82);backdrop-filter:blur(8px);border:1px solid var(--line);
+  border-radius:100px;padding:6px 14px;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mint);
+}
+.tripcard .tbody{padding:24px;display:flex;flex-direction:column;gap:10px;flex:1}
+.tripcard h3{font-family:var(--serif);font-weight:500;font-size:1.3rem}
+.tripcard .tmeta{color:var(--muted);font-size:.8rem;display:flex;gap:14px;flex-wrap:wrap}
+.tripcard .tmeta span{display:flex;align-items:center;gap:6px}
+.tripcard .tfoot{
+  margin-top:auto;padding-top:16px;border-top:1px solid var(--line);
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+}
+.tripcard .price small{display:block;font-size:.64rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.tripcard .price b{font-family:var(--serif);font-size:1.4rem;font-weight:500;color:var(--mint)}
+.tripcard .go{
+  display:inline-flex;align-items:center;gap:8px;font-size:.8rem;font-weight:600;color:var(--emerald);
+  transition:gap .3s var(--ease);
+}
+.tripcard:hover .go{gap:14px}
+/* ---------- Pagos ---------- */
+#pagos .paybox{
+  border:1px solid var(--line);border-radius:28px;overflow:hidden;
+  background:linear-gradient(160deg,rgba(11,47,51,.55),rgba(7,30,36,.35));
+}
+.paytabs{display:flex;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.paytabs button{
+  flex:1;min-width:160px;padding:20px 16px;background:transparent;border:0;cursor:pointer;
+  color:var(--muted);font-family:var(--sans);font-size:.88rem;font-weight:600;letter-spacing:.04em;
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  border-bottom:2px solid transparent;transition:.3s;
+}
+.paytabs button.on{color:var(--mint);border-bottom-color:var(--emerald);background:rgba(31,211,150,.06)}
+.paytabs button:hover{color:var(--cream)}
+.paypanel{display:none;padding:clamp(28px,4vw,48px);animation:fadeup .5s var(--ease)}
+.paypanel.on{display:block}
+@keyframes fadeup{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.payrow{
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:16px 20px;border:1px solid var(--line);border-radius:14px;margin-bottom:12px;
+  background:rgba(4,15,20,.45);flex-wrap:wrap;
+}
+.payrow small{display:block;font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:2px}
+.payrow b{font-weight:600;font-size:.95rem;word-break:break-all}
+.copybtn{
+  border:1px solid var(--line);background:transparent;color:var(--mint);border-radius:100px;
+  padding:8px 18px;font-size:.75rem;cursor:pointer;font-family:var(--sans);transition:.3s;flex:none;
+}
+.copybtn:hover{background:var(--grad);color:#03251b;border-color:transparent}
+.copybtn.ok{background:var(--emerald);color:#03251b;border-color:transparent}
+.paynote{
+  display:flex;gap:12px;align-items:flex-start;margin-top:20px;padding:16px 18px;border-radius:14px;
+  background:rgba(76,201,232,.07);border:1px solid rgba(76,201,232,.2);
+  color:var(--muted);font-size:.82rem;font-weight:300;
+}
+.paynote b{color:var(--cream)}
+.paycta{margin-top:24px;display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+.paysteps{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:26px}
+.paysteps div{border:1px solid var(--line);border-radius:14px;padding:16px;font-size:.8rem;color:var(--muted)}
+.paysteps b{display:block;color:var(--mint);font-family:var(--serif);font-size:1.2rem;margin-bottom:4px}
+@media(max-width:680px){.paysteps{grid-template-columns:1fr}}
+/* ---------- Chatbot ---------- */
+#chat-fab{
+  position:fixed;right:26px;bottom:26px;z-index:1500;
+  width:62px;height:62px;border-radius:50%;border:0;cursor:pointer;
+  background:var(--grad);display:grid;place-items:center;
+  box-shadow:0 14px 40px -8px rgba(31,211,150,.55);
+  transition:transform .35s var(--ease);
+}
+#chat-fab:hover{transform:scale(1.08)}
+#chat-fab svg{width:26px;height:26px;stroke:#03251b;transition:.3s}
+#chat-fab .ico-x{display:none}
+#chat-fab.open .ico-chat{display:none}
+#chat-fab.open .ico-x{display:block}
+#chat-fab .ping{
+  position:absolute;top:2px;right:2px;width:14px;height:14px;border-radius:50%;
+  background:#ffd166;border:2px solid var(--ink);
+}
+#chat-panel{
+  position:fixed;right:26px;bottom:104px;z-index:1500;
+  width:min(390px,calc(100vw - 32px));height:min(560px,calc(100dvh - 140px));
+  border-radius:24px;overflow:hidden;display:flex;flex-direction:column;
+  background:rgba(7,30,36,.97);backdrop-filter:blur(20px);
+  border:1px solid var(--line);box-shadow:0 30px 90px -20px rgba(0,0,0,.7);
+  opacity:0;visibility:hidden;transform:translateY(24px) scale(.97);
+  transition:.45s var(--ease);transform-origin:bottom right;
+}
+#chat-panel.open{opacity:1;visibility:visible;transform:none}
+.ch-head{
+  padding:18px 22px;display:flex;align-items:center;gap:14px;
+  background:linear-gradient(120deg,rgba(15,75,74,.8),rgba(7,30,36,.6));
+  border-bottom:1px solid var(--line);flex:none;
+}
+.ch-head .avatar{width:42px;height:42px;font-size:1rem}
+.ch-head b{display:block;font-family:var(--serif);font-weight:500}
+.ch-head small{color:var(--mint);font-size:.72rem;display:flex;align-items:center;gap:6px}
+.ch-head small::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--emerald);animation:pulse 2s infinite}
+.ch-body{flex:1;overflow-y:auto;padding:20px;display:flex;flex-direction:column;gap:12px;scrollbar-width:thin;scrollbar-color:var(--teal) transparent}
+.msg{max-width:85%;padding:12px 16px;border-radius:16px;font-size:.86rem;line-height:1.55;animation:fadeup .4s var(--ease);white-space:pre-line}
+.msg.bot{background:rgba(15,75,74,.55);border:1px solid var(--line);border-bottom-left-radius:4px;align-self:flex-start;color:var(--cream)}
+.msg.user{background:var(--grad);color:#03251b;border-bottom-right-radius:4px;align-self:flex-end;font-weight:500}
+.msg.typing{display:flex;gap:5px;align-items:center;padding:16px 18px}
+.msg.typing i{width:7px;height:7px;border-radius:50%;background:var(--mint);animation:blink 1.2s infinite}
+.msg.typing i:nth-child(2){animation-delay:.2s}
+.msg.typing i:nth-child(3){animation-delay:.4s}
+@keyframes blink{0%,80%,100%{opacity:.25}40%{opacity:1}}
+.ch-chips{display:flex;gap:8px;flex-wrap:wrap;padding:0 20px 12px;flex:none}
+.ch-chips button{
+  border:1px solid var(--line);background:rgba(4,15,20,.5);color:var(--mint);
+  border-radius:100px;padding:8px 14px;font-size:.74rem;cursor:pointer;font-family:var(--sans);transition:.3s;
+}
+.ch-chips button:hover{background:var(--grad);color:#03251b;border-color:transparent}
+.ch-input{display:flex;gap:10px;padding:14px;border-top:1px solid var(--line);flex:none;background:rgba(4,15,20,.5)}
+.ch-input input{
+  flex:1;background:rgba(4,15,20,.6);border:1px solid var(--line);border-radius:100px;
+  padding:13px 20px;color:var(--cream);font-family:var(--sans);font-size:.88rem;outline:none;transition:border-color .3s;
+}
+.ch-input input:focus{border-color:var(--emerald)}
+.ch-input button{
+  width:46px;height:46px;border-radius:50%;border:0;background:var(--grad);cursor:pointer;
+  display:grid;place-items:center;flex:none;transition:transform .3s;
+}
+.ch-input button:hover{transform:scale(1.08)}
+.ch-input button svg{width:18px;height:18px;stroke:#03251b}
+@media(max-width:480px){#chat-panel{right:16px}#chat-fab{right:16px;bottom:18px}}
+/* ---------- Footer ---------- */
+footer{border-top:1px solid var(--line);padding:70px clamp(20px,5vw,64px) 40px;background:var(--ink)}
+.f-word{
+  font-family:var(--serif);font-weight:300;text-align:center;
+  font-size:clamp(2.6rem,9vw,7.5rem);letter-spacing:.02em;line-height:1;margin-bottom:56px;
+  background:linear-gradient(180deg,var(--cream) 30%,rgba(238,247,242,.08));
+  -webkit-background-clip:text;background-clip:text;color:transparent;user-select:none;
+}
+.f-row{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;max-width:1240px;margin:0 auto;color:var(--muted);font-size:.8rem}
+.f-row .links{display:flex;gap:26px}
+.f-row a{color:var(--muted);text-decoration:none;transition:color .3s}
+.f-row a:hover{color:var(--mint)}
+</style>
+</head>
+<body>
+<div id="loader">
+  <svg class="mark" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="22" stroke="url(#lg)" stroke-width="1.5"/><path d="M24 8c6 8 6 24 0 32-6-8-6-24 0-32z" stroke="url(#lg)" stroke-width="1.5"/><path d="M8 24h32" stroke="url(#lg)" stroke-width="1.5"/><defs><linearGradient id="lg" x1="0" y1="0" x2="48" y2="48"><stop stop-color="#1fd396"/><stop offset="1" stop-color="#4cc9e8"/></linearGradient></defs></svg>
+  <div class="word">Bienaventurados</div>
+  <div class="bar"><i></i></div>
+</div>
+<div id="cursor"></div>
+
+<nav id="nav">
+  <a href="#hero" class="logo">
+    <svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="22" stroke="url(#lg2)" stroke-width="2"/><path d="M24 8c6 8 6 24 0 32-6-8-6-24 0-32z" stroke="url(#lg2)" stroke-width="2"/><path d="M8 24h32" stroke="url(#lg2)" stroke-width="2"/><defs><linearGradient id="lg2" x1="0" y1="0" x2="48" y2="48"><stop stop-color="#1fd396"/><stop offset="1" stop-color="#4cc9e8"/></linearGradient></defs></svg>
+    <span><b>Bienaventurados</b><small>Viajes con alma</small></span>
+  </a>
+  <ul class="nav-links" id="navlinks">
+    <li><a href="#ventajas">Por qué nosotros</a></li>
+    <li><a href="#viajes">Viajes</a></li>
+    <li><a href="#testimonios">Testimonios</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+  <a href="#contacto" class="btn btn-solid btn-nav magnetic">Planificá tu viaje <span class="arr">→</span></a>
+  <button id="burger" aria-label="Menú"><span></span><span></span><span></span></button>
+</nav>
+
+<header id="hero">
+  <div class="aurora a1"></div><div class="aurora a2"></div><div class="aurora a3"></div>
+  <div class="hero-copy">
+    <div class="eyebrow"><i></i> Agencia de viajes · Familias & amigos</div>
+    <h1>
+      <span class="line"><span>Los mejores viajes</span></span>
+      <span class="line"><span>se miden en</span></span>
+      <span class="line"><span><em>momentos juntos.</em></span></span>
+    </h1>
+    <p class="hero-sub">Diseñamos escapadas a medida para familias y grupos de amigos: sin estrés, sin letra chica y con todo resuelto antes de salir. Vos elegís con quién; nosotros nos ocupamos de todo lo demás.</p>
+    <div class="hero-ctas">
+      <a href="#contacto" class="btn btn-solid magnetic">Empezá tu aventura <span class="arr">→</span></a>
+      <a href="#ventajas" class="btn btn-ghost magnetic">Descubrí cómo</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><b><i class="count" data-to="12400">0</i>+</b><span>Viajeros felices</span></div>
+      <div class="stat"><b><i class="count" data-to="68">0</i></b><span>Destinos</span></div>
+      <div class="stat"><b>4.9<i>★</i></b><span>Calificación promedio</span></div>
+    </div>
+  </div>
+  <div class="hero-visual" id="parallax">
+    <div class="card-ph cph1" data-depth="14"><div class="ph">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg>
+      <p>Imagen · Familia en playa al atardecer · 900×1100</p>
+    </div></div>
+    <div class="card-ph cph2" data-depth="26"><div class="ph">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg>
+      <p>Imagen · Amigos de ruta en montaña · 800×700</p>
+    </div></div>
+    <div class="card-ph cph3" data-depth="38"><div class="ph">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg>
+      <p>Imagen · Detalle local · 600×600</p>
+    </div></div>
+    <div class="tag-chip chip1">
+      <div class="dotico">🌿</div>
+      <div><b>Turismo responsable</b><small>Apoyamos lo local en cada destino</small></div>
+    </div>
+    <div class="tag-chip chip2">
+      <div class="dotico">🧭</div>
+      <div><b>Asistencia 24/7</b><small>Estés donde estés</small></div>
+    </div>
+  </div>
+  <div class="scroll-hint">Deslizá <i></i></div>
+</header>
+
+<div class="marquee" aria-hidden="true">
+  <div class="track">
+    <span>Costa Amalfitana</span><span>Kioto</span><span>Patagonia</span><span>Islas Griegas</span><span>Cataratas del Iguazú</span><span>Bariloche</span><span>Bali</span><span>Punta del Este</span>
+    <span>Costa Amalfitana</span><span>Kioto</span><span>Patagonia</span><span>Islas Griegas</span><span>Cataratas del Iguazú</span><span>Bariloche</span><span>Bali</span><span>Punta del Este</span>
+  </div>
+</div>
+
+<section id="ventajas">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="kicker">Por qué Bienaventurados</div>
+      <h2>Viajar en grupo, <em>sin que nadie cargue</em> con el trabajo.</h2>
+      <p class="sec-sub">Organizar un viaje para ocho personas no debería ser un segundo trabajo. Nosotros lo convertimos en la parte fácil.</p>
+    </div>
+    <div class="bento">
+      <div class="bcard b-lg rv">
+        <div class="bimg"><div class="ph">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg>
+          <p>Imagen · Grupo cenando bajo luces · 1400×800</p>
+        </div></div>
+        <div class="inner">
+          <h3>Itinerarios 100% a medida</h3>
+          <p>Nada de paquetes cerrados. Cada viaje se diseña desde cero según el ritmo, presupuesto y edades del grupo: de los abuelos a los más chicos.</p>
+        </div>
+        <span class="num">01</span>
+      </div>
+      <div class="bcard b-md rv">
+        <div class="inner">
+          <div class="icobox"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M12 21s-7-4.6-7-10a7 7 0 0 1 14 0c0 5.4-7 10-7 10z"/><path d="M12 3c-3 4-3 8 0 12 3-4 3-8 0-12z"/></svg></div>
+          <h3>Turismo que deja huella buena</h3>
+          <p>Priorizamos alojamientos y anfitriones locales, y destinamos el 2% de cada viaje a proyectos de conservación en los destinos que visitamos.</p>
+        </div>
+        <span class="num">02</span>
+      </div>
+      <div class="bcard b-sm rv">
+        <div class="inner">
+          <div class="icobox"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
+          <h3>Asistencia real 24/7</h3>
+          <p>Un humano —no un bot— al otro lado del teléfono durante todo el viaje.</p>
+        </div>
+        <span class="num">03</span>
+      </div>
+      <div class="bcard b-sm rv">
+        <div class="inner">
+          <div class="icobox"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M17 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2"/><circle cx="10" cy="7" r="4"/><path d="M21 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+          <h3>Expertos en grupos</h3>
+          <p>Habitaciones conectadas, menús para los chicos, actividades por edades: pensamos en cada detalle.</p>
+        </div>
+        <span class="num">04</span>
+      </div>
+      <div class="bcard b-sm rv">
+        <div class="inner">
+          <div class="icobox"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="2" y="5" width="20" height="14" rx="3"/><path d="M2 10h20"/></svg></div>
+          <h3>Pagá a tu ritmo</h3>
+          <p>Dividí el costo entre el grupo y pagá en cuotas sin interés. Cancelación flexible hasta 15 días antes.</p>
+        </div>
+        <span class="num">05</span>
+      </div>
+      <div class="bcard b-md rv">
+        <div class="inner">
+          <div class="icobox"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18M3 12h18"/></svg></div>
+          <h3>Guías locales de verdad</h3>
+          <p>Trabajamos con anfitriones nacidos en cada destino. Van a comer donde comen ellos, no donde llevan a los turistas.</p>
+        </div>
+        <span class="num">06</span>
+      </div>
+      <div class="bcard b-lg rv">
+        <div class="bimg"><div class="ph">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg>
+          <p>Imagen · Niños jugando en un mercado local · 1400×800</p>
+        </div></div>
+        <div class="inner">
+          <h3>Cero imprevistos, cero estrés</h3>
+          <p>Traslados, entradas, reservas y seguros: todo confirmado antes de salir, todo en una sola app. Ustedes solo se ocupan de disfrutar.</p>
+        </div>
+        <span class="num">07</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="numeros">
+  <div class="wrap">
+    <div class="numband rv">
+      <div class="cell"><b><i class="count" data-to="14">0</i></b><span>Años de experiencia</span></div>
+      <div class="cell"><b><i class="count" data-to="3200">0</i>+</b><span>Familias que repiten</span></div>
+      <div class="cell"><b><i class="count" data-to="98">0</i>%</b><span>Recomendación</span></div>
+      <div class="cell"><b><i class="count" data-to="1500">0</i>+</b><span>Viajes diseñados</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="viajes">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="kicker">Próximas salidas</div>
+      <h2>Elegí tu viaje y mirá <em>cuánto sale.</em></h2>
+      <p class="sec-sub">Tocá el viaje que te interese: vas a ver el precio, qué incluye y todas las formas de pagarlo. ¿No encontrás el tuyo? Lo armamos a medida.</p>
+    </div>
+    <div class="trips">
+      <a class="tripcard rv" href="pago.html?viaje=iguazu">
+        <div class="timg"><span class="badgep">Escapada</span><div class="ph">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg>
+          <p>Imagen · Cataratas del Iguazú · 800×600</p>
+        </div></div>
+        <div class="tbody">
+          <h3>Cataratas del Iguazú</h3>
+          <div class="tmeta"><span>🗓 4 días</span><span>✈️ Vuelos incluidos</span><span>👨‍👩‍👧 Ideal familias</span></div>
+          <div class="tfoot">
+            <div class="price"><small>Desde · por persona</small><b>USD 640</b></div>
+            <span class="go">Ver y pagar →</span>
+          </div>
+        </div>
+      </a>
+      <a class="tripcard rv" href="pago.html?viaje=bariloche">
+        <div class="timg"><span class="badgep">Naturaleza</span><div class="ph">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg>
+          <p>Imagen · Bariloche y lagos · 800×600</p>
+        </div></div>
+        <div class="tbody">
+          <h3>Bariloche</h3>
+          <div class="tmeta"><span>🗓 5 días</span><span>✈️ Vuelos incluidos</span><span>🎿 Todo el año</span></div>
+          <div class="tfoot">
+            <div class="price"><small>Desde · por persona</small><b>USD 890</b></div>
+            <span class="go">Ver y pagar →</span>
+          </div>
+        </div>
+      </a>
+      <a class="tripcard rv" href="pago.html?viaje=florianopolis">
+        <div class="timg"><span class="badgep">Playa</span><div class="ph">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg>
+          <p>Imagen · Playa de Florianópolis · 800×600</p>
+        </div></div>
+        <div class="tbody">
+          <h3>Florianópolis</h3>
+          <div class="tmeta"><span>🗓 7 días</span><span>🚌 Bus premium</span><span>🏖 Frente al mar</span></div>
+          <div class="tfoot">
+            <div class="price"><small>Desde · por persona</small><b>USD 980</b></div>
+            <span class="go">Ver y pagar →</span>
+          </div>
+        </div>
+      </a>
+      <a class="tripcard rv" href="pago.html?viaje=caribe">
+        <div class="timg"><span class="badgep">All inclusive</span><div class="ph">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg>
+          <p>Imagen · Playa del Caribe · 800×600</p>
+        </div></div>
+        <div class="tbody">
+          <h3>Caribe — Punta Cana</h3>
+          <div class="tmeta"><span>🗓 7 días</span><span>✈️ Vuelos incluidos</span><span>🍹 All inclusive</span></div>
+          <div class="tfoot">
+            <div class="price"><small>Desde · por persona</small><b>USD 1.450</b></div>
+            <span class="go">Ver y pagar →</span>
+          </div>
+        </div>
+      </a>
+      <a class="tripcard rv" href="pago.html?viaje=europa">
+        <div class="timg"><span class="badgep">Gran viaje</span><div class="ph">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg>
+          <p>Imagen · Coliseo de Roma · 800×600</p>
+        </div></div>
+        <div class="tbody">
+          <h3>Europa Clásica</h3>
+          <div class="tmeta"><span>🗓 15 días</span><span>🏛 Madrid · Roma · París</span></div>
+          <div class="tfoot">
+            <div class="price"><small>Desde · por persona</small><b>USD 2.850</b></div>
+            <span class="go">Ver y pagar →</span>
+          </div>
+        </div>
+      </a>
+      <a class="tripcard rv" href="pago.html?viaje=japon">
+        <div class="timg"><span class="badgep">Exótico</span><div class="ph">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg>
+          <p>Imagen · Templo en Kioto · 800×600</p>
+        </div></div>
+        <div class="tbody">
+          <h3>Japón Esencial</h3>
+          <div class="tmeta"><span>🗓 12 días</span><span>🚄 Tokio · Kioto · Osaka</span></div>
+          <div class="tfoot">
+            <div class="price"><small>Desde · por persona</small><b>USD 3.400</b></div>
+            <span class="go">Ver y pagar →</span>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section id="testimonios">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="kicker">Testimonios</div>
+      <h2>Lo que cuentan <em>al volver</em> a casa.</h2>
+    </div>
+    <div class="t-viewport rv">
+      <div class="t-track" id="ttrack">
+        <div class="t-slide"><div class="t-card">
+          <div class="quo">“</div><div class="stars">★★★★★</div>
+          <blockquote>Éramos 11 entre primos, tíos y abuelos, y no hubo ni una sola discusión logística. Todo estaba pensado, hasta la sillita del bebé en el restaurante de Positano. Vamos a repetir, seguro.</blockquote>
+          <div class="t-who"><div class="avatar">M</div><div><b>Marta G.</b><small>Costa Amalfitana · Familia de 11</small></div></div>
+        </div></div>
+        <div class="t-slide"><div class="t-card">
+          <div class="quo">“</div><div class="stars">★★★★★</div>
+          <blockquote>Con mis amigos veníamos postergando Japón hace años porque nadie quería organizarlo. Bienaventurados lo resolvió en dos videollamadas. El itinerario era una obra de arte.</blockquote>
+          <div class="t-who"><div class="avatar">D</div><div><b>Diego R.</b><small>Japón · Grupo de 6 amigos</small></div></div>
+        </div></div>
+        <div class="t-slide"><div class="t-card">
+          <div class="quo">“</div><div class="stars">★★★★★</div>
+          <blockquote>Viajar con dos niños chicos nos daba un poco de miedo, pero fue el viaje más tranquilo de nuestra vida. La asistencia 24/7 no es un eslogan: nos cambiaron un vuelo un domingo a las 7 de la mañana.</blockquote>
+          <div class="t-who"><div class="avatar">L</div><div><b>Lucía y Andrés</b><small>Laponia · Familia con niños</small></div></div>
+        </div></div>
+        <div class="t-slide"><div class="t-card">
+          <div class="quo">“</div><div class="stars">★★★★★</div>
+          <blockquote>Lo del guía local no lo entendí hasta que cenamos en casa de una familia en Marrakech. Eso no sale en ninguna guía. Fue el momento del año para todo el grupo.</blockquote>
+          <div class="t-who"><div class="avatar">S</div><div><b>Sergio M.</b><small>Marruecos · Grupo de 8 amigos</small></div></div>
+        </div></div>
+        <div class="t-slide"><div class="t-card">
+          <div class="quo">“</div><div class="stars">★★★★★</div>
+          <blockquote>Pagamos entre cinco y cada una recibió su propio link de pago. Cero planillas, cero perseguir a nadie. Solo por eso ya valió la pena. El viaje, un 10.</blockquote>
+          <div class="t-who"><div class="avatar">C</div><div><b>Carla V.</b><small>Islas Griegas · Grupo de 5 amigas</small></div></div>
+        </div></div>
+      </div>
+    </div>
+    <div class="t-nav rv">
+      <div class="t-dots" id="tdots"></div>
+      <div class="t-arrows">
+        <button id="tprev" aria-label="Anterior">←</button>
+        <button id="tnext" aria-label="Siguiente">→</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contacto">
+  <div class="wrap">
+    <div class="c-grid">
+      <div>
+        <div class="sec-head rv" style="margin-bottom:34px">
+          <div class="kicker">Contacto</div>
+          <h2>Contanos con quién <em>querés viajar.</em></h2>
+          <p class="sec-sub">Respondemos en menos de 24 horas con una primera propuesta, sin compromiso.</p>
+        </div>
+        <div class="rv">
+          <div class="c-item">
+            <div class="icobox"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M4 4h16v16H4z" opacity="0"/><path d="M3 7l9 6 9-6M3 7v10a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2z"/></svg></div>
+            <div><b>Escribinos</b><a href="mailto:hola@bienaventurados.com">hola@bienaventurados.com</a></div>
+          </div>
+          <div class="c-item">
+            <div class="icobox"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M22 16.9v3a2 2 0 0 1-2.2 2A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L8 10a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.7 2z"/></svg></div>
+            <div><b>Llamanos</b><a href="tel:+59847220000">+598 4722 00 00 · L–V, 9:00–19:00</a></div>
+          </div>
+          <div class="c-item">
+            <div class="icobox"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M12 21s-7-4.6-7-10a7 7 0 0 1 14 0c0 5.4-7 10-7 10z"/><circle cx="12" cy="11" r="2.5"/></svg></div>
+            <div><b>Visitanos</b><span>18 de Julio 1234, Paysandú · También podés pagar tu viaje acá</span></div>
+          </div>
+          <div class="c-item" style="border-bottom:0">
+            <div class="icobox"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none"/></svg></div>
+            <div><b>Seguinos</b><a href="https://www.instagram.com/bien_aventurados_pdu/" target="_blank" rel="noopener">@bien_aventurados_pdu</a></div>
+          </div>
+        </div>
+      </div>
+      <form id="cform" class="rv" novalidate>
+        <div class="field"><label for="fn">Nombre</label><input id="fn" type="text" placeholder="Tu nombre" required></div>
+        <div class="field"><label for="fe">Email</label><input id="fe" type="email" placeholder="tu@email.com" required></div>
+        <div class="field"><label for="ft">Tipo de viaje</label>
+          <select id="ft"><option>Viaje en familia</option><option>Escapada con amigos</option><option>Luna de miel / pareja</option><option>Grupo grande (+10)</option><option>Aún no lo sé</option></select>
+        </div>
+        <div class="field"><label for="fp">Nº de viajeros</label><input id="fp" type="number" min="1" placeholder="4"></div>
+        <div class="field f-full"><label for="fm">Contanos tu viaje soñado</label><textarea id="fm" placeholder="Destino en mente, fechas aproximadas, qué no puede faltar…"></textarea></div>
+        <div class="f-full"><button type="submit" class="btn btn-solid magnetic" style="width:100%;justify-content:center">Quiero mi propuesta <span class="arr">→</span></button></div>
+        <div id="f-ok">
+          <div class="icobox"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" width="30" height="30"><path d="M20 6L9 17l-5-5"/></svg></div>
+          <div class="big">¡Mensaje enviado!</div>
+          <p>Gracias por confiar en Bienaventurados. Te vamos a escribir en menos de 24 horas con una primera propuesta.</p>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="f-word">Bienaventurados</div>
+  <div class="f-row">
+    <span>© 2026 Bienaventurados Viajes S.A.</span>
+    <div class="links">
+      <a href="https://www.instagram.com/bien_aventurados_pdu/" target="_blank" rel="noopener">Instagram</a><a href="#">Aviso legal</a><a href="#">Privacidad</a>
+    </div>
+    <span>Hecho con 🌿 en Paysandú</span>
+  </div>
+</footer>
+<button id="chat-fab" aria-label="Abrir chat">
+  <svg class="ico-chat" viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M21 11.5a8.4 8.4 0 0 1-8.5 8.3 8.9 8.9 0 0 1-3.2-.6L3 21l1.8-5.1a8 8 0 0 1-1.3-4.4A8.4 8.4 0 0 1 12 3.2a8.4 8.4 0 0 1 9 8.3z"/></svg>
+  <svg class="ico-x" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg>
+  <span class="ping"></span>
+</button>
+<div id="chat-panel" role="dialog" aria-label="Chat de ayuda">
+  <div class="ch-head">
+    <div class="avatar">B</div>
+    <div><b>Bea, de Bienaventurados</b><small>En línea · responde al instante</small></div>
+  </div>
+  <div class="ch-body" id="ch-body"></div>
+  <div class="ch-chips" id="ch-chips"></div>
+  <div class="ch-input">
+    <input id="ch-in" type="text" placeholder="Escribí tu pregunta…" autocomplete="off">
+    <button id="ch-send" aria-label="Enviar"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg></button>
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  /* Preloader */
+  window.addEventListener("load",function(){
+    setTimeout(function(){document.getElementById("loader").classList.add("done")},900);
+  });
+
+  /* Cursor */
+  var cursor=document.getElementById("cursor");
+  var cx=innerWidth/2,cy=innerHeight/2,tx=cx,ty=cy;
+  document.addEventListener("mousemove",function(e){tx=e.clientX;ty=e.clientY});
+  (function loop(){
+    cx+=(tx-cx)*.18;cy+=(ty-cy)*.18;
+    cursor.style.transform="translate("+(cx-cursor.offsetWidth/2)+"px,"+(cy-cursor.offsetHeight/2)+"px)";
+    requestAnimationFrame(loop);
+  })();
+  document.querySelectorAll("a,button,select,input,textarea,.t-dots i").forEach(function(el){
+    el.addEventListener("mouseenter",function(){cursor.classList.add("big")});
+    el.addEventListener("mouseleave",function(){cursor.classList.remove("big")});
+  });
+
+  /* Nav */
+  var nav=document.getElementById("nav");
+  addEventListener("scroll",function(){nav.classList.toggle("scrolled",scrollY>40)},{passive:true});
+  var burger=document.getElementById("burger"),links=document.getElementById("navlinks");
+  burger.addEventListener("click",function(){
+    burger.classList.toggle("open");links.classList.toggle("open");
+  });
+  links.querySelectorAll("a").forEach(function(a){
+    a.addEventListener("click",function(){burger.classList.remove("open");links.classList.remove("open")});
+  });
+
+  /* Reveal on scroll */
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if(en.isIntersecting){en.target.classList.add("on");io.unobserve(en.target)}
+    });
+  },{threshold:.12});
+  document.querySelectorAll(".rv").forEach(function(el,i){
+    el.style.transitionDelay=(i%4)*70+"ms";io.observe(el);
+  });
+
+  /* Counters */
+  function animateCount(el){
+    var to=+el.dataset.to,dur=1800,t0=null;
+    function step(t){
+      if(!t0)t0=t;
+      var p=Math.min((t-t0)/dur,1),e=1-Math.pow(1-p,3);
+      el.textContent=Math.round(to*e).toLocaleString("es-ES");
+      if(p<1)requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+  var cio=new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if(en.isIntersecting){animateCount(en.target);cio.unobserve(en.target)}
+    });
+  },{threshold:.6});
+  document.querySelectorAll(".count").forEach(function(el){cio.observe(el)});
+
+  /* Hero parallax */
+  var pxWrap=document.getElementById("parallax");
+  if(pxWrap && matchMedia("(hover:hover)").matches){
+    var cards=pxWrap.querySelectorAll(".card-ph");
+    document.getElementById("hero").addEventListener("mousemove",function(e){
+      var r=pxWrap.getBoundingClientRect();
+      var dx=(e.clientX-(r.left+r.width/2))/r.width;
+      var dy=(e.clientY-(r.top+r.height/2))/r.height;
+      cards.forEach(function(c){
+        var d=+c.dataset.depth;
+        c.style.translate=(-dx*d)+"px "+(-dy*d)+"px";
+      });
+    });
+  }
+
+  /* Magnetic buttons */
+  if(matchMedia("(hover:hover)").matches){
+    document.querySelectorAll(".magnetic").forEach(function(b){
+      b.addEventListener("mousemove",function(e){
+        var r=b.getBoundingClientRect();
+        b.style.transform="translate("+(e.clientX-r.left-r.width/2)*.18+"px,"+(e.clientY-r.top-r.height/2)*.28+"px)";
+      });
+      b.addEventListener("mouseleave",function(){b.style.transform=""});
+    });
+  }
+
+  /* Bento spotlight */
+  document.querySelectorAll(".bcard").forEach(function(c){
+    c.addEventListener("mousemove",function(e){
+      var r=c.getBoundingClientRect();
+      c.style.setProperty("--mx",(e.clientX-r.left)+"px");
+      c.style.setProperty("--my",(e.clientY-r.top)+"px");
+    });
+  });
+
+  /* Testimonials slider */
+  var track=document.getElementById("ttrack"),
+      slides=track.children.length,
+      dotsBox=document.getElementById("tdots"),
+      idx=0,timer;
+  function perView(){return innerWidth>1020?3:innerWidth>680?2:1}
+  function pages(){return slides-perView()+1}
+  function buildDots(){
+    dotsBox.innerHTML="";
+    for(var i=0;i<pages();i++){
+      var d=document.createElement("i");
+      (function(n){d.addEventListener("click",function(){go(n);restart()})})(i);
+      dotsBox.appendChild(d);
+    }
+  }
+  function go(n){
+    idx=Math.max(0,Math.min(n,pages()-1));
+    track.style.transform="translateX(-"+(idx*100/perView())+"%)";
+    Array.prototype.forEach.call(dotsBox.children,function(d,i){d.classList.toggle("on",i===idx)});
+  }
+  function restart(){clearInterval(timer);timer=setInterval(function(){go(idx+1>=pages()?0:idx+1)},5000)}
+  document.getElementById("tnext").addEventListener("click",function(){go(idx+1>=pages()?0:idx+1);restart()});
+  document.getElementById("tprev").addEventListener("click",function(){go(idx-1<0?pages()-1:idx-1);restart()});
+  addEventListener("resize",function(){buildDots();go(idx)});
+  buildDots();go(0);restart();
+
+  /* Contact form → email */
+  var CONSULTA_EMAIL="ssoba93@gmail.com"; // ← cambiá acá el mail que recibe las consultas
+  document.getElementById("cform").addEventListener("submit",function(e){
+    e.preventDefault();
+    var n=document.getElementById("fn"),m=document.getElementById("fe");
+    if(!n.value.trim()){n.focus();n.style.borderColor="#e0655f";return}
+    if(!m.value.trim()||m.value.indexOf("@")<0){m.focus();m.style.borderColor="#e0655f";return}
+    var btn=e.target.querySelector('button[type="submit"]');
+    btn.disabled=true;btn.textContent="Enviando…";
+    fetch("https://formsubmit.co/ajax/"+CONSULTA_EMAIL,{
+      method:"POST",
+      headers:{"Content-Type":"application/json","Accept":"application/json"},
+      body:JSON.stringify({
+        _subject:"✉️ Nueva consulta web — "+n.value.trim(),
+        _template:"table",
+        "Nombre":n.value.trim(),
+        "Email":m.value.trim(),
+        "Tipo de viaje":document.getElementById("ft").value,
+        "Nº de viajeros":document.getElementById("fp").value||"—",
+        "Mensaje":document.getElementById("fm").value.trim()||"—",
+        "Fecha":new Date().toLocaleString("es-UY")
+      })
+    })
+    .then(function(r){if(!r.ok)throw new Error();return r.json()})
+    .then(function(){document.getElementById("f-ok").classList.add("show")})
+    .catch(function(){
+      btn.disabled=false;btn.innerHTML='Quiero mi propuesta <span class="arr">→</span>';
+      alert("No pudimos enviar el formulario. Escribinos directo a hola@bienaventurados.com");
+    });
+  });
+
+  /* ===== Chatbot FAQ Bienaventurados ===== */
+  var fab=document.getElementById("chat-fab"),
+      panel=document.getElementById("chat-panel"),
+      body=document.getElementById("ch-body"),
+      chips=document.getElementById("ch-chips"),
+      input=document.getElementById("ch-in"),
+      send=document.getElementById("ch-send"),
+      started=false;
+
+  var FAQ=[
+    {k:["hola","buenas","buen dia","buen día","que tal","qué tal","hey"],
+     a:"¡Hola! 👋 Soy Bea, del equipo de Bienaventurados. Puedo contarte sobre destinos, precios, formas de pago, cancelaciones y cómo trabajamos. ¿Qué querés saber?"},
+    {k:["destino","destinos","donde","dónde","lugares","viajes disponibles","a donde","adónde"],
+     a:"Trabajamos con más de 68 destinos: desde escapadas cercanas como Bariloche, Cataratas del Iguazú o las playas de Brasil, hasta Europa, Japón, Bali o la Patagonia.\n\nComo cada viaje se arma a medida, no hay catálogo cerrado: contanos qué tienen en mente y lo diseñamos. 🌎"},
+    {k:["precio","precios","cuanto","cuánto","costo","cuesta","sale","presupuesto","tarifa"],
+     a:"En la sección Viajes de la web tenés las próximas salidas con precio: Iguazú desde USD 640, Bariloche desde USD 890, Caribe desde USD 1.450, Europa desde USD 2.850…\n\nTocá el viaje que te interese y vas a ver cuánto sale y cómo pagarlo. Y si querés algo a medida, pedí tu propuesta gratis en Contacto. 💬"},
+    {k:["pago","pagar","cuota","cuotas","transferencia","mercado pago","tarjeta","financ","abonar","seña"],
+     a:"Podés pagar de cuatro formas:\n\n🏦 Transferencia bancaria (BROU, en pesos o dólares)\n💠 Mercado Pago (hasta 12 cuotas según tu banco)\n💳 Tarjeta por pasarela segura\n🏠 En persona, en nuestra oficina de Paysandú (efectivo o tarjeta)\n\nElegí tu viaje en la sección Viajes: al abrirlo vas a ver el precio y todos los datos para pagar. Además podés dividir el costo entre el grupo."},
+    {k:["cancel","reembolso","devolucion","devolución","cambiar fecha","reprogramar"],
+     a:"Tenés cancelación flexible hasta 15 días antes de la salida con devolución del monto abonado (pueden aplicar cargos de terceros, como aéreos ya emitidos).\n\nTambién podés reprogramar fechas sin costo una vez, avisando con 20 días. Cada propuesta incluye las condiciones por escrito, sin letra chica. ✅"},
+    {k:["niño","niños","chico","chicos","bebe","bebé","familia","edad","abuelo","abuelos","hijos"],
+     a:"¡Somos especialistas en viajes en familia! Armamos itinerarios pensados por edades: actividades para los más chicos, ritmo tranquilo para los abuelos, habitaciones conectadas, menús infantiles y traslados cómodos.\n\nViajan familias con bebés hasta grupos de tres generaciones. 👨‍👩‍👧‍👦"},
+    {k:["grupo","amigos","cuantas personas","cuántas personas","grande","despedida"],
+     a:"Organizamos desde parejas hasta grupos de más de 20 personas. Para grupos grandes conseguimos tarifas especiales y coordinamos pagos individuales para que nadie persiga a nadie. 🎉"},
+    {k:["asistencia","emergencia","ayuda en viaje","24","soporte","problema"],
+     a:"Durante todo el viaje tenés asistencia humana 24/7 por WhatsApp y teléfono. Si un vuelo se cae un domingo a las 7 AM, lo resolvemos nosotros: reemitimos, reubicamos y te avisamos. No es un bot, es nuestro equipo. 🧭"},
+    {k:["seguro","seguros","cobertura","medic"],
+     a:"Todos nuestros viajes incluyen seguro de asistencia en viaje con cobertura médica, y podés ampliarlo con cancelación por cualquier causa. Te detallamos las coberturas en la propuesta. 🛡️"},
+    {k:["como funciona","cómo funciona","proceso","empezar","reservar","contratar","propuesta"],
+     a:"Es simple:\n\n1️⃣ Nos escribís por el formulario de Contacto\n2️⃣ En 24 h recibís una primera propuesta sin compromiso\n3️⃣ La ajustamos juntos hasta que quede perfecta\n4️⃣ Reservás con una seña y pagás como prefieras\n5️⃣ Viajás con todo resuelto y asistencia 24/7"},
+    {k:["contacto","telefono","teléfono","mail","email","whatsapp","oficina","direccion","dirección","hablar"],
+     a:"Podés escribirnos a hola@bienaventurados.com, llamarnos al +598 4722 00 00 (L–V de 9 a 19 h), visitarnos en 18 de Julio 1234, Paysandú, o seguirnos en Instagram: @bien_aventurados_pdu.\n\nO directamente dejá tus datos en el formulario de abajo y te contactamos nosotros. 📩"},
+    {k:["sosten","ecolog","ambiente","responsable","local"],
+     a:"Creemos en un turismo que deja huella buena: priorizamos alojamientos y anfitriones locales, y destinamos el 2% de cada viaje a proyectos de conservación en los destinos que visitamos. 🌿"},
+    {k:["gracias","genial","perfecto","barbaro","bárbaro","buenisimo","buenísimo","dale"],
+     a:"¡De nada! 😊 Si querés dar el siguiente paso, dejanos tus datos en el formulario de Contacto y en menos de 24 h te mandamos una propuesta a medida. ¡Nos encantaría ayudarte a planear ese viaje!"}
+  ];
+  var FALLBACK="Buena pregunta 🤔 No tengo una respuesta exacta para eso, pero el equipo sí. Escribinos a hola@bienaventurados.com o dejá tus datos en el formulario de Contacto y te respondemos en menos de 24 h.\n\nTambién podés preguntarme por: destinos, precios, pagos, cancelaciones o viajes con niños.";
+  var QUICK=["🌎 Destinos","💰 Precios","💳 Formas de pago","👨‍👩‍👧 Viajar con niños","📋 ¿Cómo funciona?"];
+
+  function norm(s){return s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"")}
+  function reply(q){
+    var nq=norm(q),best=null,score=0;
+    FAQ.forEach(function(f){
+      var s=0;
+      f.k.forEach(function(k){if(nq.indexOf(norm(k))>-1)s+=k.length});
+      if(s>score){score=s;best=f}
+    });
+    return best?best.a:FALLBACK;
+  }
+  function addMsg(txt,who){
+    var d=document.createElement("div");
+    d.className="msg "+who;d.textContent=txt;
+    body.appendChild(d);body.scrollTop=body.scrollHeight;
+    return d;
+  }
+  function botSay(txt){
+    var t=document.createElement("div");
+    t.className="msg bot typing";t.innerHTML="<i></i><i></i><i></i>";
+    body.appendChild(t);body.scrollTop=body.scrollHeight;
+    setTimeout(function(){t.remove();addMsg(txt,"bot")},600+Math.min(txt.length*4,1200));
+  }
+  function ask(q){
+    addMsg(q,"user");
+    setTimeout(function(){botSay(reply(q))},250);
+  }
+  function buildChips(){
+    chips.innerHTML="";
+    QUICK.forEach(function(c){
+      var b=document.createElement("button");
+      b.textContent=c;
+      b.addEventListener("click",function(){ask(c.replace(/^[^\s]+\s/,""))});
+      chips.appendChild(b);
+    });
+  }
+  fab.addEventListener("click",function(){
+    var open=panel.classList.toggle("open");
+    fab.classList.toggle("open",open);
+    var ping=fab.querySelector(".ping");if(ping)ping.remove();
+    if(open&&!started){
+      started=true;buildChips();
+      setTimeout(function(){botSay("¡Hola! 👋 Soy Bea, tu asistente de viajes. Preguntame lo que quieras sobre destinos, precios, pagos o cómo trabajamos.")},350);
+    }
+    if(open)input.focus();
+  });
+  function submit(){
+    var v=input.value.trim();
+    if(!v)return;
+    input.value="";ask(v);
+  }
+  send.addEventListener("click",submit);
+  input.addEventListener("keydown",function(e){if(e.key==="Enter")submit()});
+})();
+</script>
+
+</body>
+</html>

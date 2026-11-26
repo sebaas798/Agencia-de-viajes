@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reservá tu viaje — Bienaventurados</title>
+<meta name="description" content="Precio, detalle y formas de pago de tu viaje con Bienaventurados.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,500&family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#040f14;--deep:#071e24;--pine:#0b2f33;--teal:#0f4b4a;
+  --emerald:#1fd396;--mint:#7ff0c8;--aqua:#4cc9e8;
+  --cream:#eef7f2;--muted:#93b3ab;--line:rgba(148,196,182,.14);
+  --grad:linear-gradient(100deg,var(--emerald),var(--aqua));
+  --serif:'Fraunces',Georgia,serif;--sans:'Sora',system-ui,sans-serif;
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+::selection{background:rgba(31,211,150,.35);color:#fff}
+body{font-family:var(--sans);background:var(--ink);color:var(--cream);overflow-x:hidden;-webkit-font-smoothing:antialiased;line-height:1.6}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:9998;opacity:.05;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E")}
+.aurora{position:fixed;border-radius:50%;filter:blur(90px);opacity:.4;pointer-events:none;z-index:0}
+.aurora.a1{width:50vw;height:50vw;background:radial-gradient(circle,rgba(15,75,74,.9),transparent 65%);top:-16vw;left:-12vw}
+.aurora.a2{width:38vw;height:38vw;background:radial-gradient(circle,rgba(31,211,150,.2),transparent 65%);bottom:-10vw;right:-8vw}
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:16px clamp(20px,5vw,64px);background:rgba(4,15,20,.72);backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
+.logo{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--cream)}
+.logo svg{width:34px;height:34px}
+.logo b{font-family:var(--serif);font-weight:500;font-size:1.25rem}
+.logo small{display:block;font-size:.58rem;letter-spacing:.42em;text-transform:uppercase;color:var(--muted);margin-top:-2px}
+.backlink{color:var(--muted);text-decoration:none;font-size:.85rem;display:flex;align-items:center;gap:8px;transition:color .3s}
+.backlink:hover{color:var(--mint)}
+main{position:relative;z-index:1;max-width:1240px;margin:0 auto;padding:130px clamp(20px,5vw,64px) 90px}
+.kicker{font-size:.72rem;letter-spacing:.32em;text-transform:uppercase;color:var(--emerald);display:flex;align-items:center;gap:14px;margin-bottom:18px}
+.kicker::before{content:"";width:36px;height:1px;background:var(--grad)}
+h1{font-family:var(--serif);font-weight:400;font-size:clamp(2.2rem,5vw,3.8rem);line-height:1.06;letter-spacing:-.01em}
+h1 em{font-style:italic;font-weight:300;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.tmeta{display:flex;gap:22px;flex-wrap:wrap;color:var(--muted);font-size:.9rem;margin-top:18px}
+.grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(28px,4vw,56px);margin-top:clamp(36px,5vw,60px);align-items:start}
+@media(max-width:940px){.grid{grid-template-columns:1fr}}
+.ph{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;background:linear-gradient(135deg,#0b2f33 0%,#0f4b4a 55%,#123c46 100%);position:relative;color:var(--muted);text-align:center;padding:18px}
+.ph::before{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(127,240,200,.09) 48%,transparent 62%);background-size:220% 100%;animation:shimmer 3.4s linear infinite}
+@keyframes shimmer{0%{background-position:120% 0}100%{background-position:-120% 0}}
+.ph svg{width:34px;height:34px;opacity:.7}
+.ph p{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;line-height:1.7;max-width:240px}
+.mainimg{height:340px;border-radius:24px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 80px -20px rgba(0,0,0,.6)}
+.box{border:1px solid var(--line);border-radius:24px;padding:clamp(24px,3vw,36px);background:linear-gradient(160deg,rgba(11,47,51,.5),rgba(7,30,36,.3));margin-top:22px}
+.box h3{font-family:var(--serif);font-weight:500;font-size:1.25rem;margin-bottom:16px}
+.inc{list-style:none;display:grid;gap:12px}
+.inc li{display:flex;gap:12px;align-items:flex-start;color:var(--muted);font-size:.92rem;font-weight:300}
+.inc li::before{content:"✓";flex:none;width:22px;height:22px;border-radius:50%;background:rgba(31,211,150,.15);color:var(--mint);display:grid;place-items:center;font-size:.7rem;margin-top:2px}
+.paycol{position:sticky;top:100px}
+@media(max-width:940px){.paycol{position:static}}
+.pricecard{border:1px solid rgba(31,211,150,.3);border-radius:24px;padding:clamp(24px,3vw,36px);background:linear-gradient(160deg,rgba(15,75,74,.55),rgba(7,30,36,.5));position:relative;overflow:hidden}
+.pricecard::before{content:"";position:absolute;top:-40%;right:-20%;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(31,211,150,.15),transparent 70%);filter:blur(20px)}
+.pricecard small{font-size:.68rem;letter-spacing:.24em;text-transform:uppercase;color:var(--muted)}
+.pricecard .amount{font-family:var(--serif);font-weight:500;font-size:clamp(2.6rem,5vw,3.6rem);line-height:1.05;margin:6px 0 2px}
+.pricecard .amount i{font-style:normal;font-size:.45em;color:var(--mint)}
+.pricecard .per{color:var(--muted);font-size:.85rem;font-weight:300}
+.priceline{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid var(--line);font-size:.88rem}
+.priceline:last-of-type{border-bottom:0}
+.priceline span{color:var(--muted);font-weight:300}
+.priceline b{font-weight:600;color:var(--mint)}
+.pricenote{margin-top:10px;color:var(--muted);font-size:.74rem;font-weight:300}
+.paybox{border:1px solid var(--line);border-radius:24px;overflow:hidden;background:linear-gradient(160deg,rgba(11,47,51,.55),rgba(7,30,36,.35));margin-top:22px}
+.paytabs{display:flex;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.paytabs button{flex:1;min-width:120px;padding:16px 12px;background:transparent;border:0;cursor:pointer;color:var(--muted);font-family:var(--sans);font-size:.82rem;font-weight:600;display:flex;align-items:center;justify-content:center;gap:8px;border-bottom:2px solid transparent;transition:.3s}
+.paytabs button.on{color:var(--mint);border-bottom-color:var(--emerald);background:rgba(31,211,150,.06)}
+.paytabs button:hover{color:var(--cream)}
+.paypanel{display:none;padding:clamp(20px,3vw,30px);animation:fadeup .5s var(--ease)}
+.paypanel.on{display:block}
+@keyframes fadeup{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.payrow{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:13px 16px;border:1px solid var(--line);border-radius:14px;margin-bottom:10px;background:rgba(4,15,20,.45);flex-wrap:wrap}
+.payrow small{display:block;font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:2px}
+.payrow b{font-weight:600;font-size:.9rem;word-break:break-all}
+.copybtn{border:1px solid var(--line);background:transparent;color:var(--mint);border-radius:100px;padding:7px 16px;font-size:.72rem;cursor:pointer;font-family:var(--sans);transition:.3s;flex:none}
+.copybtn:hover{background:var(--grad);color:#03251b;border-color:transparent}
+.copybtn.ok{background:var(--emerald);color:#03251b;border-color:transparent}
+.paynote{display:flex;gap:10px;align-items:flex-start;margin-top:14px;padding:13px 15px;border-radius:14px;background:rgba(76,201,232,.07);border:1px solid rgba(76,201,232,.2);color:var(--muted);font-size:.76rem;font-weight:300}
+.paynote b{color:var(--cream)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:15px 30px;border-radius:100px;border:0;cursor:pointer;font-family:var(--sans);font-size:.9rem;font-weight:600;text-decoration:none;transition:transform .35s var(--ease),box-shadow .35s}
+.btn-solid{background:var(--grad);color:#03251b;width:100%}
+.btn-solid:hover{box-shadow:0 12px 40px -8px rgba(31,211,150,.5);transform:translateY(-2px)}
+.btn-ghost{background:transparent;color:var(--cream);border:1px solid rgba(238,247,242,.25)}
+.btn-ghost:hover{border-color:var(--emerald);color:var(--mint)}
+.helpbar{margin-top:22px;border:1px solid var(--line);border-radius:18px;padding:18px 22px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;background:rgba(7,30,36,.5);font-size:.85rem;color:var(--muted)}
+.helpbar a{color:var(--mint);text-decoration:none}
+/* Selector de viajes (sin parámetro) */
+.picker{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:40px}
+@media(max-width:940px){.picker{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:620px){.picker{grid-template-columns:1fr}}
+.pick{border:1px solid var(--line);border-radius:20px;padding:24px;text-decoration:none;color:var(--cream);background:linear-gradient(160deg,rgba(11,47,51,.5),rgba(7,30,36,.3));transition:transform .4s var(--ease),border-color .4s}
+.pick:hover{transform:translateY(-6px);border-color:rgba(31,211,150,.4)}
+.pick h3{font-family:var(--serif);font-weight:500;font-size:1.2rem;margin-bottom:6px}
+.pick span{color:var(--muted);font-size:.8rem;display:block}
+.pick b{display:block;margin-top:12px;font-family:var(--serif);font-size:1.3rem;color:var(--mint);font-weight:500}
+/* Personas */
+.persrow{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:18px;padding:14px 16px;border:1px solid var(--line);border-radius:14px;background:rgba(4,15,20,.45)}
+.persrow>span{font-size:.85rem;color:var(--muted)}
+.stepper{display:flex;align-items:center;gap:14px}
+.stepper button{width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:transparent;color:var(--mint);font-size:1.1rem;cursor:pointer;transition:.3s;line-height:1}
+.stepper button:hover{background:var(--grad);color:#03251b;border-color:transparent}
+.stepper b{font-family:var(--serif);font-size:1.3rem;min-width:26px;text-align:center}
+/* Reserva */
+.resbox .field{margin-bottom:14px}
+.resbox label{display:block;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.resbox input,.resbox textarea{width:100%;background:rgba(4,15,20,.55);border:1px solid var(--line);border-radius:12px;padding:13px 16px;color:var(--cream);font-family:var(--sans);font-size:.9rem;outline:none;transition:border-color .3s,box-shadow .3s}
+.resbox input:focus,.resbox textarea:focus{border-color:var(--emerald);box-shadow:0 0 0 4px rgba(31,211,150,.12)}
+.resbox textarea{resize:vertical;min-height:70px}
+.res-ok{text-align:center;padding:24px 10px}
+.res-ok .big{font-family:var(--serif);font-size:1.5rem;margin-bottom:10px;color:var(--mint)}
+.res-ok p{color:var(--muted);font-size:.86rem;font-weight:300}
+footer{border-top:1px solid var(--line);padding:34px clamp(20px,5vw,64px);display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;color:var(--muted);font-size:.8rem;position:relative;z-index:1}
+footer a{color:var(--muted);text-decoration:none;transition:color .3s}
+footer a:hover{color:var(--mint)}
+.rv{opacity:0;transform:translateY(30px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.rv.on{opacity:1;transform:none}
+</style>
+</head>
+<body>
+<div class="aurora a1"></div><div class="aurora a2"></div>
+<nav>
+  <a href="index.html" class="logo">
+    <svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="22" stroke="url(#lg2)" stroke-width="2"/><path d="M24 8c6 8 6 24 0 32-6-8-6-24 0-32z" stroke="url(#lg2)" stroke-width="2"/><path d="M8 24h32" stroke="url(#lg2)" stroke-width="2"/><defs><linearGradient id="lg2" x1="0" y1="0" x2="48" y2="48"><stop stop-color="#1fd396"/><stop offset="1" stop-color="#4cc9e8"/></linearGradient></defs></svg>
+    <span><b>Bienaventurados</b><small>Viajes con alma</small></span>
+  </a>
+  <a href="index.html#viajes" class="backlink">← Volver a los viajes</a>
+</nav>
+
+<main id="app"></main>
+
+<footer>
+  <span>© 2026 Bienaventurados Viajes S.A.</span>
+  <a href="https://www.instagram.com/bien_aventurados_pdu/" target="_blank" rel="noopener">@bien_aventurados_pdu</a>
+  <span>Hecho con 🌿 en Paysandú</span>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var TRIPS={
+    iguazu:{name:"Cataratas del Iguazú",tag:"Escapada",days:"4 días · 3 noches",transporte:"Vuelos ida y vuelta incluidos",salidas:"Salidas: setiembre, octubre y noviembre 2026",price:640,img:"Imagen · Cataratas del Iguazú · 1200×700",
+      inc:["Vuelos ida y vuelta con equipaje","Hotel 4★ con desayuno, 3 noches","Traslados aeropuerto–hotel–parque","Entradas al Parque Nacional (lado argentino y brasileño)","Guía local y asistencia 24/7","Seguro de asistencia en viaje"]},
+    bariloche:{name:"Bariloche",tag:"Naturaleza",days:"5 días · 4 noches",transporte:"Vuelos ida y vuelta incluidos",salidas:"Salidas: todo el año (consultá temporada de nieve)",price:890,img:"Imagen · Bariloche y lagos · 1200×700",
+      inc:["Vuelos ida y vuelta con equipaje","Hotel con desayuno, 4 noches","Circuito Chico y Cerro Catedral","Excursión a Villa La Angostura","Guía local y asistencia 24/7","Seguro de asistencia en viaje"]},
+    florianopolis:{name:"Florianópolis",tag:"Playa",days:"7 días · 6 noches",transporte:"Bus premium cama ida y vuelta",salidas:"Salidas: diciembre 2026 a marzo 2027",price:980,img:"Imagen · Playa de Florianópolis · 1200×700",
+      inc:["Bus premium cama ida y vuelta","Posada frente al mar, 6 noches con desayuno","Traslados a playas del norte y del sur","Paseo en barco por la bahía","Coordinador de grupo y asistencia 24/7","Seguro de asistencia en viaje"]},
+    caribe:{name:"Caribe — Punta Cana",tag:"All inclusive",days:"7 días · 6 noches",transporte:"Vuelos ida y vuelta incluidos",salidas:"Salidas: mensuales, todo el año",price:1450,img:"Imagen · Playa de Punta Cana · 1200×700",
+      inc:["Vuelos ida y vuelta con equipaje","Resort 5★ all inclusive, 6 noches","Traslados aeropuerto–resort","Comidas, bebidas y actividades incluidas","Asistencia 24/7 en español","Seguro de asistencia en viaje"]},
+    europa:{name:"Europa Clásica",tag:"Gran viaje",days:"15 días · Madrid · Roma · París",transporte:"Vuelos y trenes entre ciudades incluidos",salidas:"Salidas: mayo y setiembre 2026",price:2850,img:"Imagen · Coliseo de Roma · 1200×700",
+      inc:["Vuelos internacionales con equipaje","Hoteles céntricos 3★/4★ con desayuno","Trenes y traslados entre ciudades","City tours guiados en las 3 capitales","Asistencia 24/7 y coordinador","Seguro de viaje con cobertura Schengen"]},
+    japon:{name:"Japón Esencial",tag:"Exótico",days:"12 días · Tokio · Kioto · Osaka",transporte:"Vuelos y Japan Rail Pass incluidos",salidas:"Salidas: marzo (sakura) y octubre 2026",price:3400,img:"Imagen · Templo en Kioto · 1200×700",
+      inc:["Vuelos internacionales con equipaje","Hoteles 3★/4★ y una noche en ryokan","Japan Rail Pass de 7 días","Guías locales en español","Asistencia 24/7","Seguro de asistencia en viaje"]}
+  };
+
+  var app=document.getElementById("app");
+  var slug=new URLSearchParams(location.search).get("viaje");
+  var t=slug?TRIPS[slug]:null;
+
+  function money(n){return "USD "+n.toLocaleString("es-UY")}
+
+  function phSVG(){return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg>'}
+
+  function payBox(ref){
+    return '<div class="paybox rv">'+
+      '<div class="paytabs">'+
+        '<button class="on" data-pay="transfer">🏦 Transferencia</button>'+
+        '<button data-pay="mp">💠 Mercado Pago</button>'+
+        '<button data-pay="card">💳 Tarjeta</button>'+
+        '<button data-pay="local">🏠 En persona</button>'+
+      '</div>'+
+      '<div class="paypanel on" id="pay-transfer">'+
+        '<div class="payrow" style="border-color:rgba(31,211,150,.35)"><div><small>Monto a transferir hoy (seña)</small><b data-calc="senia"></b></div></div>'+
+        '<div class="payrow"><div><small>Banco</small><b>BROU — Banco República</b></div></div>'+
+        '<div class="payrow"><div><small>Titular</small><b>Bienaventurados Viajes S.A.</b></div><button class="copybtn" data-copy="Bienaventurados Viajes S.A.">Copiar</button></div>'+
+        '<div class="payrow"><div><small>Cuenta (UYU)</small><b>110-XXXXXXX-00001</b></div><button class="copybtn" data-copy="110-XXXXXXX-00001">Copiar</button></div>'+
+        '<div class="payrow"><div><small>Cuenta (USD)</small><b>110-XXXXXXX-00002</b></div><button class="copybtn" data-copy="110-XXXXXXX-00002">Copiar</button></div>'+
+        '<div class="payrow"><div><small>Referencia del pago</small><b>'+ref+' + tu nombre</b></div><button class="copybtn" data-copy="'+ref+'">Copiar</button></div>'+
+        '<div class="payrow"><div><small>Enviá el comprobante a</small><b>pagos@bienaventurados.com</b></div><button class="copybtn" data-copy="pagos@bienaventurados.com">Copiar</button></div>'+
+        '<div class="paynote">⚠️ <span><b>Datos pendientes:</b> reemplazá las cuentas marcadas con X por las reales antes de publicar.</span></div>'+
+      '</div>'+
+      '<div class="paypanel" id="pay-mp">'+
+        '<div class="payrow" style="border-color:rgba(31,211,150,.35)"><div><small>Monto a pagar hoy (seña)</small><b data-calc="senia"></b></div></div>'+
+        '<div class="payrow"><div><small>Alias</small><b>bienaventurados.mp</b></div><button class="copybtn" data-copy="bienaventurados.mp">Copiar</button></div>'+
+        '<a href="https://link.mercadopago.com.uy/bienaventurados" target="_blank" rel="noopener" class="btn btn-solid" style="margin-top:8px">Pagar con Mercado Pago →</a>'+
+        '<p style="color:var(--muted);font-size:.78rem;margin-top:10px;text-align:center">Hasta 12 cuotas según tu banco · Poné "'+ref+'" en el concepto</p>'+
+        '<div class="paynote">⚠️ <span><b>Dato pendiente:</b> reemplazá el link y alias por los de tu cuenta real de Mercado Pago.</span></div>'+
+      '</div>'+
+      '<div class="paypanel" id="pay-card">'+
+        '<p style="color:var(--muted);font-size:.85rem;margin-bottom:14px">Aceptamos Visa, Master, OCA y American Express. Pago procesado con cifrado seguro.</p>'+
+        '<a href="#" id="cardpay-btn" class="btn btn-solid">Pagar con tarjeta →</a>'+
+        '<div class="paynote">⚠️ <span><b>Pendiente de conectar:</b> botón listo para enlazar tu checkout de Mercado Pago (Checkout Pro) o Stripe.</span></div>'+
+      '</div>'+
+      '<div class="paypanel" id="pay-local">'+
+        '<div class="payrow" style="border-color:rgba(31,211,150,.35)"><div><small>Monto a pagar (seña)</small><b data-calc="senia"></b></div></div>'+
+        '<div class="payrow"><div><small>Dirección</small><b>18 de Julio 1234, Paysandú</b></div></div>'+
+        '<div class="payrow"><div><small>Horario</small><b>Lunes a viernes de 9 a 19 h · Sábados de 9 a 13 h</b></div></div>'+
+        '<div class="payrow"><div><small>Aceptamos</small><b>Efectivo (UYU o USD) y todas las tarjetas</b></div></div>'+
+        '<p style="color:var(--muted);font-size:.8rem;margin-top:12px">Vení con tu nombre y el viaje reservado, y te llevás el comprobante en el momento. Si preferís, coordiná antes por WhatsApp o Instagram y te esperamos con todo pronto. 🧉</p>'+
+        '<div class="paynote">⚠️ <span><b>Dato pendiente:</b> reemplazá la dirección y horarios por los reales de la oficina.</span></div>'+
+      '</div>'+
+    '</div>';
+  }
+
+  if(t){
+    document.title=t.name+" — Reservá y pagá | Bienaventurados";
+    app.innerHTML=
+      '<div class="kicker rv">Reservá tu viaje · '+t.tag+'</div>'+
+      '<h1 class="rv">'+t.name+'</h1>'+
+      '<div class="tmeta rv"><span>🗓 '+t.days+'</span><span>🚐 '+t.transporte+'</span><span>📅 '+t.salidas+'</span></div>'+
+      '<div class="grid">'+
+        '<div>'+
+          '<div class="mainimg rv"><div class="ph">'+phSVG()+'<p>'+t.img+'</p></div></div>'+
+          '<div class="box rv"><h3>Qué incluye</h3><ul class="inc">'+t.inc.map(function(i){return "<li>"+i+"</li>"}).join("")+'</ul></div>'+
+          '<div class="helpbar rv">¿Dudas antes de reservar? <span>Escribinos a <a href="mailto:hola@bienaventurados.com">hola@bienaventurados.com</a> o por <a href="https://www.instagram.com/bien_aventurados_pdu/" target="_blank" rel="noopener">Instagram</a></span></div>'+
+        '</div>'+
+        '<div class="paycol">'+
+          '<div class="pricecard rv">'+
+            '<small>Precio por persona</small>'+
+            '<div class="amount"><i>USD</i> '+t.price.toLocaleString("es-UY")+'</div>'+
+            '<p class="per">Base habitación doble · Precio final según fecha y cantidad de viajeros</p>'+
+            '<div class="persrow"><span>¿Para cuántas personas pagás?</span>'+
+              '<div class="stepper"><button type="button" id="p-minus" aria-label="Menos">−</button><b id="np">2</b><button type="button" id="p-plus" aria-label="Más">+</button></div>'+
+            '</div>'+
+            '<div style="margin-top:14px">'+
+              '<div class="priceline"><span>Total (<span id="np2">2</span> personas)</span><b data-calc="total"></b></div>'+
+              '<div class="priceline"><span>Reservás hoy con la seña del 20%</span><b data-calc="senia"></b></div>'+
+              '<div class="priceline"><span>Saldo hasta 30 días antes de viajar</span><b data-calc="saldo"></b></div>'+
+            '</div>'+
+            '<p class="pricenote">Cancelación flexible hasta 15 días antes · Todos los pagos con comprobante y confirmación por email. También puede pagar cada uno lo suyo: indicalo en la reserva.</p>'+
+          '</div>'+
+          '<div class="box resbox rv" id="res-wrap">'+
+            '<h3>1 · Reservá tus lugares</h3>'+
+            '<p style="color:var(--muted);font-size:.84rem;font-weight:300;margin-bottom:18px">Guardamos tu lugar y nos llega el aviso al instante. Después pagás la seña con el medio que prefieras.</p>'+
+            '<form id="resform" novalidate>'+
+              '<div class="field"><label for="rn">Nombre y apellido</label><input id="rn" type="text" placeholder="Tu nombre" required></div>'+
+              '<div class="field"><label for="re">Email</label><input id="re" type="email" placeholder="tu@email.com" required></div>'+
+              '<div class="field"><label for="rw">WhatsApp</label><input id="rw" type="tel" placeholder="09x xxx xxx"></div>'+
+              '<div class="field"><label for="rc">Comentarios (opcional)</label><textarea id="rc" placeholder="Ej: pagamos por separado, viajamos con un bebé…"></textarea></div>'+
+              '<button type="submit" class="btn btn-solid" id="res-btn">Reservar <span id="np3">2</span> lugares →</button>'+
+            '</form>'+
+          '</div>'+
+          '<div class="box rv" style="margin-top:22px;padding:0;border:0;background:none">'+
+            '<h3 style="padding:0 4px">2 · Pagá la seña</h3>'+
+          '</div>'+
+          payBox(t.name)+
+        '</div>'+
+      '</div>';
+  }else{
+    app.innerHTML=
+      '<div class="kicker rv">Reservá tu viaje</div>'+
+      '<h1 class="rv">¿A dónde <em>nos vamos?</em></h1>'+
+      '<p class="rv" style="color:var(--muted);margin-top:16px;max-width:520px;font-weight:300">Elegí tu viaje para ver cuánto sale, qué incluye y cómo pagarlo.</p>'+
+      '<div class="picker">'+Object.keys(TRIPS).map(function(k){
+        var v=TRIPS[k];
+        return '<a class="pick rv" href="pago.html?viaje='+k+'"><h3>'+v.name+'</h3><span>'+v.days+'</span><b>Desde '+money(v.price)+'</b></a>';
+      }).join("")+'</div>';
+  }
+
+  /* Personas + recálculo */
+  var RESERVA_EMAIL="ssoba93@gmail.com"; // ← cambiá acá el mail que recibe las reservas
+  var pers=2;
+  function recalc(){
+    if(!t)return;
+    var total=t.price*pers,senia=Math.round(total*.2);
+    ["np","np2","np3"].forEach(function(id){var e=document.getElementById(id);if(e)e.textContent=pers});
+    document.querySelectorAll('[data-calc="total"]').forEach(function(e){e.textContent=money(total)});
+    document.querySelectorAll('[data-calc="senia"]').forEach(function(e){e.textContent=money(senia)});
+    document.querySelectorAll('[data-calc="saldo"]').forEach(function(e){e.textContent=money(total-senia)});
+    var rb=document.getElementById("res-btn");
+    if(rb)rb.innerHTML="Reservar "+pers+(pers===1?" lugar":" lugares")+" →";
+  }
+  if(t){
+    document.getElementById("p-minus").addEventListener("click",function(){if(pers>1){pers--;recalc()}});
+    document.getElementById("p-plus").addEventListener("click",function(){if(pers<30){pers++;recalc()}});
+    recalc();
+  }
+
+  /* Reserva → email */
+  var rf=document.getElementById("resform");
+  if(rf)rf.addEventListener("submit",function(e){
+    e.preventDefault();
+    var rn=document.getElementById("rn"),re_=document.getElementById("re");
+    if(!rn.value.trim()){rn.focus();rn.style.borderColor="#e0655f";return}
+    if(!re_.value.trim()||re_.value.indexOf("@")<0){re_.focus();re_.style.borderColor="#e0655f";return}
+    var total=t.price*pers,senia=Math.round(total*.2);
+    var btn=document.getElementById("res-btn");
+    btn.disabled=true;btn.textContent="Enviando reserva…";
+    fetch("https://formsubmit.co/ajax/"+RESERVA_EMAIL,{
+      method:"POST",
+      headers:{"Content-Type":"application/json","Accept":"application/json"},
+      body:JSON.stringify({
+        _subject:"🧳 NUEVA RESERVA — "+t.name+" · "+pers+" personas",
+        _template:"table",
+        "Viaje":t.name,
+        "Personas":pers,
+        "Precio por persona":money(t.price),
+        "Total":money(total),
+        "Seña a cobrar (20%)":money(senia),
+        "Nombre":rn.value.trim(),
+        "Email":re_.value.trim(),
+        "WhatsApp":document.getElementById("rw").value.trim()||"—",
+        "Comentarios":document.getElementById("rc").value.trim()||"—",
+        "Fecha de la reserva":new Date().toLocaleString("es-UY")
+      })
+    })
+    .then(function(r){if(!r.ok)throw new Error();return r.json()})
+    .then(function(){
+      document.getElementById("res-wrap").innerHTML=
+        '<div class="res-ok"><div class="big">¡Lugares reservados! 🎉</div>'+
+        '<p>Recibimos tu reserva de <b>'+pers+'</b> lugar'+(pers===1?"":"es")+' para <b>'+t.name+'</b>.<br><br>'+
+        'Ahora pagá la seña de <b>'+money(senia)+'</b> con el medio que prefieras (abajo) y envianos el comprobante. Te confirmamos por email en el día.</p></div>';
+    })
+    .catch(function(){
+      btn.disabled=false;recalc();
+      alert("No pudimos enviar la reserva automáticamente. Escribinos a hola@bienaventurados.com o por Instagram y te la tomamos al toque.");
+    });
+  });
+
+  /* Tabs */
+  var payTabs=document.querySelectorAll(".paytabs button");
+  payTabs.forEach(function(tb){
+    tb.addEventListener("click",function(){
+      payTabs.forEach(function(x){x.classList.remove("on")});
+      document.querySelectorAll(".paypanel").forEach(function(p){p.classList.remove("on")});
+      tb.classList.add("on");
+      document.getElementById("pay-"+tb.dataset.pay).classList.add("on");
+    });
+  });
+  /* Copiar */
+  document.querySelectorAll(".copybtn").forEach(function(b){
+    b.addEventListener("click",function(){
+      var txt=b.dataset.copy;
+      function done(){b.textContent="¡Copiado!";b.classList.add("ok");setTimeout(function(){b.textContent="Copiar";b.classList.remove("ok")},1800)}
+      if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(done)}
+      else{var ta=document.createElement("textarea");ta.value=txt;document.body.appendChild(ta);ta.select();document.execCommand("copy");document.body.removeChild(ta);done()}
+    });
+  });
+  var cardBtn=document.getElementById("cardpay-btn");
+  if(cardBtn)cardBtn.addEventListener("click",function(e){
+    e.preventDefault();
+    alert("La pasarela de tarjeta todavía no está conectada.\nCuando tengas tu cuenta de Mercado Pago o Stripe, este botón llevará directo al checkout seguro.");
+  });
+  /* Reveal */
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(en){if(en.isIntersecting){en.target.classList.add("on");io.unobserve(en.target)}});
+  },{threshold:.1});
+  document.querySelectorAll(".rv").forEach(function(el,i){el.style.transitionDelay=(i%4)*70+"ms";io.observe(el)});
+})();
+</script>
+</body>
+</html>
